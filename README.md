@@ -1,163 +1,159 @@
-[![Language](https://img.shields.io/badge/Language-Swift%204.2%20%7C%20Obj%20C-orange.svg?style=flat)](https://developer.apple.com/swift/)
-[![Platforms OS X | iOS | watchOS | tvOS](https://img.shields.io/badge/Platforms-OS%20X%20%7C%20iOS%20%7C%20watchOS%20%7C%20tvOS-lightgray.svg?style=flat)](https://developer.apple.com/swift/)
-[![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://github.com/robreuss/VirtualGameController/blob/master/LICENSE)
-[![Carthage](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![CocoaPods](https://img.shields.io/badge/CocoaPods-compatible-4BC51D.svg?style=flat)](https://cocoapods.org/?q=virtualgamecontroller)
-![Travis](https://travis-ci.org/robreuss/VirtualGameController.svg)
+# 🗳️ Elections Page
 
-![Logo](http://robreuss.squarespace.com/storage/Game-Controller-Outline-300px.png)
-# Virtual Game Controller
+## 📋 Overview
 
-## Overview
-Virtual Game Controller (VGC) makes it simple to create software-based controllers for games and other purposes, enabling you to easily control one iOS device with another (or multiple other devices, such as in the case of a tvOS game).  The framework wraps Apple's GCController Framework API, making it easy to simulatenously support both your own software-based controllers and hardware-based controllers that conform to the MFi standard, with a single code base.  The [GCController API](https://developer.apple.com/library/content/documentation/ServicesDiscovery/Conceptual/GameControllerPG/Introduction/Introduction.html#//apple_ref/doc/uid/TP40013276-CH1-SW1) supports both reading the values of game controller elements directly (polling) as well as registering to be called when a value changes using a block-based handler.  VGC operates the same way and supports all of the features of the GCController API for both software- and hardware-based controllers.  
+Elections Page es una plataforma web diseñada para facilitar la promoción, gestión y seguimiento de las campañas políticas de un partido o coalición. El proyecto está dividido en dos partes principales: una sección pública que permite a los ciudadanos informarse sobre los candidatos, eventos y propuestas del partido, y una sección administrativa que ofrece a los gestores herramientas para administrar el contenido de la página de forma eficiente y segura.
 
-While VGC is typically used to have an iOS device act as a controller for another iOS or tvOS device, it can also be used where two iOS devices act as peers, with a shared game environment presented on each device.  In that type of implementation, user inputs through on-screen controls flow through the framework and are processed by the handlers on both devices.  VGC supports easy creation of custom element types, including images and Data types, so that game logic such as state can be coordinated between the two devices.  This capability is perfect for table-top games with two players, including ARKit games where you want both players to see and act on a common game space.  
+En la parte pública, los usuarios pueden explorar las diferentes propuestas políticas, conocer los perfiles de los candidatos y participar en encuestas o sugerencias. Además, la plataforma incluye un sistema de noticias y eventos, que mantiene a los ciudadanos actualizados sobre las actividades más relevantes.
 
-**Important**: The framework comes with a rich set of sample apps for iOS, tvOS, and MacOS, including both SceneKit and SprikeKit examples.  A considerable amount of documentation appears as comments in the iOS Peripheral and iOS Central sample projects, and using those two projects on seperate devices is the best place to start.  Next, consider trying the SceneKitShipDemo, which really gives a feel for how the framework can enhance a game.  If you have trouble getting the sample projects to work or any other questions, contact me at <virtualgamecontroller@gmail.com>.
+En la parte administrativa, los responsables del sitio tienen acceso a un panel de control donde pueden gestionar candidatos, propuestas, noticias y eventos, así como personalizar el contenido del sitio web. Elections Page también ofrece funcionalidades de estadísticas y encuestas, lo que permite visualizar el nivel de aceptación de diferentes iniciativas.
 
-## Features
+El objetivo de Elections Page es proporcionar una solución digital moderna, segura y adaptable a cualquier contexto político, promoviendo la transparencia y la interacción entre los partidos políticos y la ciudadanía.
 
-- **Wraps Apple's *GameController* framework API (GCController)**
-- **Create software-based controllers**
-- **High performance**
-- **<5ms latency (including processing) when sending Doubles (64-bit words) at 60/sec**
-- **Both closures and polling supported for processing input**
-- **Support for peer mode**
-- **Controller forwarding**
-- **Simple bidirectional communication on a shared channel**
-- **Device motion support**
-- **Custom elements**
-- **Custom element mapping**
-- **WiFi-based**
-- **Ability to enhance inexpensive slide-on/form-fitting controllers**
-- **iCade controller support** 
-- **Support for snapshots compatible with GCController snapshots** 
-- **Framework-based, no dependencies**
+---
 
-## Requirements 
+## 🌐 Features
 
-- iOS 9.0+ / MacOS 10.9+
-- Xcode 9 / Swift 4.2 / Objective C
+### **Front (Público General)**
 
-## Platform Support
+- **Inicio:**
+  - Muestra el slogan del partido, logo y representante principal.
+  - Incluye la misión, visión y valores del partido.
+  - Presenta las personas que apoyan la candidatura.
+  - Muestra las principales propuestas políticas.
+  - Resalta los próximos eventos y noticias relevantes.
+  - ![Inicio](screenshots/front_inicio.png)
 
-- iOS
-- tvOS
-- MacOS
-- watchOS
+- **Candidatos:**
+  - Lista de candidatos con nombre, descripción breve y enlace a una página de detalles.
+  - Muestra información clave de cada candidato, incluyendo su trayectoria y propuestas.
+  - ![Candidatos](screenshots/front_candidatos.png)
 
-## Some Use Cases
-**VirtualGameController** is a drop-in replacement for Apple's _Game Controller_ framework, so it can be easily integrated into existing controller-based games.
+- **Eventos:**
+  - Calendario de eventos del partido.
+  - Filtrado por etiquetas, fechas y nombres de eventos.
+  - ![Eventos](screenshots/front_eventos.png)
 
-**VirtualGameController** may be useful in the following cases:
+- **Noticias:**
+  - Sección de noticias relevantes, con posibilidad de filtrado y búsqueda.
+  - ![Noticias](screenshots/front_noticias.png)
 
-- **Developing and supporting software-based controllers.**  Enable your users to use their iPhone, iPad or Apple Watch to control your game, leveraging 3d touch and motion input.  Especially useful with Apple TV.  Inputs are flowed through the GCController API (that is, through the MFi profiles) and so your software-based controller will appear as a hardware-based controller.  Easily send information from your game to your software controller (bidirectional communication).  The API for creating a software-based controller is simple and easy-to-use.
-- **Providing a pair of users with a shared gaming experience (ARKit).** VGC makes it easy to implement a shared controller environment, so that a pair of users playing the same game on their respective devices will receive controller input data from both devices (users).  A single set of block-based handlers can be implemented to handle input from both on-screen controls and controller data received from the opposite device.  VGC also makes it easy to manage state across the devices by using custom elements.
-- **Creating a hybrid hardware/software controller using controller forwarding.**
-- **Supporting large numbers of controllers for social games.**  There are no imposed limits on the number of hardware or software controllers that can be used with a game.  The two third-party controller limit on the Apple TV can be exceeded using controller forwarding (bridging), hybrid controllers and software-based controllers. 
-- **Creating text-driven games.**  Support for string-based custom inputs makes it easy to create text-oriented games.  Use of voice dictation is demonstrated in the sample projects.
+- **Propuestas:**
+  - Lista de propuestas del partido, con posibilidad de votación y comentarios.
+  - ![Propuestas](screenshots/front_propuestas.png)
 
-## Terminology
-* **Peripheral**: A software-based game controller.
-* **Central**: Typically a game that supports hardware and software controllers.  The Central utilizes VirtualGameController as a replacement for the Apple Game Controller framework.
-* **Bridge**: Acts as a relay between a Peripheral and a Central, and represents a hybrid of the two.  Key use case is "controller forwarding".
+- **Sugerencias:**
+  - Formulario que permite a los ciudadanos enviar sus sugerencias, opiniones o preguntas.
+  - ![Sugerencias](screenshots/front_sugerencias.png)
 
-## Framework Integration
-Platform-specific framework projects are included in the workspace.  A single framework file supports both Peripherals (software-based controllers) and Centrals (that is, your game).
+- **Estadísticas:**
+  - Visualización de datos de encuestas y votaciones.
+  - ![Estadísticas](screenshots/front_estadisticas.png)
 
-``` swift
-import VirtualGameController
+---
+
+### 🔐 **Back (Administradores)**
+
+- **Login:**
+  - Acceso seguro para los administradores del sitio mediante correo electrónico y contraseña.
+  - ![Login](screenshots/back_login.png)
+
+- **Perfil:**
+  - Opciones para actualizar la información personal del administrador, como nombre, correo y contraseña.
+  - ![Perfil](screenshots/back_perfil.png)
+
+- **Home:**
+  - Gestión del contenido visible en la página de inicio, como el slogan, logo y redes sociales.
+  - ![Home](screenshots/back_home.png)
+
+- **Usuarios:**
+  - Gestión de cuentas de administradores, permitiendo la creación, edición y eliminación de usuarios.
+  - ![Usuarios](screenshots/back_usuarios.png)
+
+- **Propuestas:**
+  - Gestión de propuestas políticas, permitiendo su creación, edición y eliminación.
+  - ![Propuestas](screenshots/back_propuestas.png)
+
+- **Noticias y Eventos:**
+  - Gestión de las publicaciones de noticias y eventos del partido.
+  - ![Noticias y Eventos](screenshots/back_noticias_eventos.png)
+
+---
+
+## ⚙️ Requirements
+
+- **PHP**: Versión 8.0 o superior.
+- **Laravel**: Versión 10.
+- **MySQL**: Versión 8.0.
+- **Servidor web**: Apache o Nginx.
+- **Composer**: Para gestionar las dependencias de PHP.
+- **Node.js**: Para gestionar las dependencias del front-end.
+
+---
+
+## 📦 Dependencias
+
+- **Laravel**: Framework de desarrollo web en PHP.
+- **Blade**: Motor de plantillas nativo de Laravel.
+- **Axios**: Biblioteca para manejar solicitudes HTTP.
+- **Posion Template**: Plantilla HTML5/CSS utilizada en el front-end.
+- **Laravel UI**: Scaffolding para autenticación en Laravel.
+
+---
+
+## 📥 Instalación
+
+Clonar el repositorio:
+
+```bash
+https://github.com/ArielParedesLozada/manejo-proyecto.git
 ```
 
-Note that you currently need to ````import GameController```` as well.
+Acceder al directorio del proyecto:
 
-See the [instructions on the Wiki](https://github.com/robreuss/VirtualGameController/wiki/Implementing-in-Objective-C) for utilizing Objective C.
-``
-#### CocoaPods
-Preliminary support is in place for [CocoaPods](https://cocoapods.org/?q=virtualgamecontroller).
+```bash
+cd manejo-proyecto.git
+```
 
-#### Carthage
-In order to integrate using Carthage, add VGC to your Cartfile:
+Instalar las dependencias de PHP:
 
-````
-github "robreuss/VirtualGameController"
-````
+```bash
+composer install
+```
 
-Then use platform-specific commands to create the build products that you need to add to your project:
+Instalar las dependencias de Node.js:
 
-````
-carthage update --platform iOS
-carthage update --platform OSX
-carthage update --platform tvOS
-carthage update --platform watchOS
-````
+```bash
+npm install
+```
 
-## Reference Apps
-The project includes a pair apps that implement most of the available framework features and settings, as well as providing a generally helpful test environment.
+Configurar el archivo `.env` con los datos de conexión a la base de datos.
 
-NOTE: You cannot run more than one app using simulators at one time because of IP address sharing.  Run a Central or Peripheral in a simulator, and use hardware devices to interact.
+Generar la clave de la aplicación:
 
-### Peripheral_iOS ###
-The ````Peripheral_iOS```` sample project provides a reference implementation of a software-based game controller.  Once you have implemented VGC in your game (Central) you can use the Peripheral_iOS app to test it:
+```bash
+php artisan key:generate
+```
 
-![Peripheral Test](https://static1.1.sqspcdn.com/static/f/677681/26657435/1446879995410/peripheral.png?token=Tfx6nkrlOJpryXF1LmuZmIvXUTM%3D)
+Ejecutar las migraciones e implantación de la base de datos:
 
-### Central_iOS ###
-The ````Central_iOS```` sample project provides a reference implementation of a Central (your game, to which Peripherals connect).  It provides a straightforward way of testing your implementation of Peripherals:
+```bash
+php artisan migrate:fresh --seed
+```
 
-![Central Test](https://static1.1.sqspcdn.com/static/f/677681/26657433/1446879952810/central.png?token=hvc5ml0dydCvhbfVtXjZ39Cai2U%3D)
+Iniciar el servidor local:
 
-## Core Documentation
-* [Integrating VGC into your Game (Central)](https://github.com/robreuss/VirtualGameController/wiki/Game-Integration-(Central)) 
-* [Creating a Software-based Controller (Peripheral)](https://github.com/robreuss/VirtualGameController/wiki/Creating-a-Software-based-Controller-(Peripheral)) 
-* [Implementing Peer/Multiplayer Capabilities](https://github.com/robreuss/VirtualGameController/wiki/Implementing-Peer-Multiplayer-Capabilities)
+```bash
+php artisan serve
+```
 
-## Further Documentation
-* [Sending Messages from Central to Controller](https://github.com/robreuss/VirtualGameController/wiki/Bidirectional-Communication) 
-* [Setup a Peripheral From the Central at Runtime](https://github.com/robreuss/VirtualGameController/wiki/Peripheral-Setup-from-the-Central) 
-* [Custom Elements](https://github.com/robreuss/VirtualGameController/wiki/Custom-Elements)
-* [Custom Mappings](https://github.com/robreuss/VirtualGameController/wiki/Custom-Mappings)
-* [Using Objective C](https://github.com/robreuss/VirtualGameController/wiki/Implementing-in-Objective-C)
-* [Apple Watch Integration](https://github.com/robreuss/VirtualGameController/wiki/Apple-Watch-Integration)
-* [Supporting iCade Controllers](https://github.com/robreuss/VirtualGameController/wiki/iCade-Controller-Support)
+Acceder a la aplicación:
 
-## Sample Projects
-* [Exploring the Sample Projects](https://github.com/robreuss/VirtualGameController/wiki/Exploring-the-Sample-Projects) 
-* [Testing Using DemoBots](https://github.com/robreuss/VirtualGameController/wiki/Testing-using-DemoBots) 
-* [Testing Using Scenekit Vehicle](https://github.com/robreuss/VirtualGameController/wiki/Testing-using-SceneKitVehicle)
-* [Setup Frameworks in Sample Projects](https://github.com/robreuss/VirtualGameController/wiki/Setup-Frameworks-in-Sample-Projects) 
- 
-## Contact and Support
-Feel free to contact me with any questions either using [LinkedIn](https://www.linkedin.com/pub/rob-reuss/2/7b/488) or <virtualgamecontroller@gmail.com>.
+- Front: [http://localhost:8000](http://localhost:8000)
+- Back (Admin): [http://127.0.0.1:8000/admin/organization/show-config](http://127.0.0.1:8000/admin/organization/show-config)
 
+---
 
-## Working with MFi Hardware-based Controllers
-VirtualGameController is a wrapper around Apple's Game Controller framework, and so working with hardware controllers with VGC is the same as it is with Apple's [Game Controller framework](https://developer.apple.com/library/tvos/documentation/GameController/Reference/GCController_Ref/index.html).  See the Game Integration section below and the sample projects for additional details.
+## 📄 Licencia
 
-
-## License
-The MIT License (MIT)
-
-Copyright (c) [2018] [Rob Reuss]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-[Logo from here](https://openclipart.org/user-detail/qubodup)
-
-
+Este proyecto está bajo la Licencia MIT.
